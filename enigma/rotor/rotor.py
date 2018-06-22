@@ -1,6 +1,5 @@
 """Encoders for enigma's rotor mechanism."""
 
-from . import exceptions
 from .encoder import Encoder
 
 
@@ -23,8 +22,9 @@ class Rotor(Encoder):
     def __init__(
             self,
             wiring='EKMFLGDQVZNTOWYHXUSPAIBRCJ',
-            ring_setting='01',
-            position='A'):
+            ring_setting=1,
+            position='A',
+            turnover_positions=['R']):
         """
         Set the initial settings of the rotor.
 
@@ -35,7 +35,7 @@ class Rotor(Encoder):
                 will connect to for each left hand pin when the rotor is in
                 position 'A'.
 
-            ring_offset:
+            ring_setting:
                 The offset of the letters on the rotor as a letter or number.
                 Default: 'A'.
 
@@ -43,10 +43,15 @@ class Rotor(Encoder):
                 The starting position of the rotor as a letter or number.
                 Default: 'A'.
 
+            turnover_positions:
+                String or list of strings containig the letter position at
+                which the rotor will cause the next to rotate. Default: 'A'.
+
         """
         super().__init__(wiring)
-        self.ring_offset = self._get_rotation_offset(ring_setting)
-        self.set_position(self._get_rotation_offset(position))
+        self.turnover_positions = turnover_positions
+        self.ring_setting = ring_setting
+        self.set_position(position)
 
     def encode(self, letter, reverse=False):
         """
@@ -87,31 +92,27 @@ class Rotor(Encoder):
         if self.rotation >= len(self.wiring):
             self.rotation = 0
 
-    def set_position(self, position):
+    def set_position(self, letter_position):
         """Turn the rotor to a given position."""
-        offset = position - self.ring_offset
+        numeric_position = self.ALPHA.index(letter_position) + 1
+        offset = numeric_position - self.ring_setting
         if offset < 0:
             offset += len(self.wiring)
         self.rotation = offset
 
+    def rotate_next_rotor(self):
+        """Return True if the next rotor should rotate."""
+        if self.position in self.turnover_positions:
+            return True
+        return False
+
     @property
     def position(self):
         """Return the current position of the rotor."""
-        offset = self.rotation + self.ring_offset
+        offset = self.rotation + self.ring_setting - 1
         if offset >= len(self.wiring):
             offset -= len(self.wiring)
         return self.ALPHA[offset]
-
-    @property
-    def ring_setting(self):
-        """
-        Return the current ring setting.
-
-        Returns:
-            str containg a two digit, zero padded integer.
-
-        """
-        return str(self.ring_offset + 1).zfill(2)
 
     def _find_pin(self, pin_letter):
         """Return the pin number for a given letter input."""
@@ -125,27 +126,3 @@ class Rotor(Encoder):
         """Find the letter position for a given pin number."""
         offset = pin_number - self.rotation
         return self.ALPHA[offset]
-
-    def _get_rotation_offset(self, input):
-        """Return a rotational offset from a str or in input."""
-        if isinstance(input, int):
-            return self._get_rotation_offset_numeric(input)
-        if isinstance(input, str):
-            return self._get_rotation_offset_alpha(input)
-        raise exceptions.InvalidRotorSetting(input)
-
-    def _get_rotation_offset_numeric(self, position: int):
-        """Set rotor position with numeric input."""
-        if position > len(self.wiring):
-            raise exceptions.InvalidRotorSetting(position)
-        return position - 1
-
-    def _get_rotation_offset_alpha(self, position: str):
-        """Set rotor position for string input."""
-        if position.isdigit():
-            return self._get_rotation_offset_numeric(int(position))
-        try:
-            numeric_position = self.ALPHA.index(position.upper())
-        except ValueError as e:
-            raise exceptions.InvalidRotorSetting(position)
-        return numeric_position

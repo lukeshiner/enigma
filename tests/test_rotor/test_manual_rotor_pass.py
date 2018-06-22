@@ -55,7 +55,7 @@ class TestFullRotorPassThroughManual(RotorTest):
         self.middle_rotor = self.get_rotor(
             'AJDKSIRUXBLHWTMCQGZNPYFVOE', position='A')
         self.right_rotor = self.get_rotor(
-            'BDFHJLCPRTXVZNYEIWGAKMUSQO', position='A', ring_setting='02')
+            'BDFHJLCPRTXVZNYEIWGAKMUSQO', position='A', ring_setting=2)
         output = []
         self.right_rotor.rotate()
         output.append(self.encode('A'))

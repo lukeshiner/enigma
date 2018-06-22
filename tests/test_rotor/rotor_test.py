@@ -10,11 +10,15 @@ class RotorTest:
     def get_rotor(
             self,
             wiring='EKMFLGDQVZNTOWYHXUSPAIBRCJ',
-            ring_setting='01',
-            position='A'):
+            ring_setting=1,
+            position='A',
+            turnover_positions=['R']):
         """Return Rotor object."""
         return Rotor(
-            wiring=wiring, ring_setting=ring_setting, position=position)
+            wiring=wiring,
+            ring_setting=ring_setting,
+            position=position,
+            turnover_positions=turnover_positions)
 
     def get_reflector(self, wiring='YRUHQSLDPXNGOKMIEBFZCWVJAT'):
         """Return Reflector object."""

@@ -1,8 +1,6 @@
 """Tests for enigma's rotors."""
 
-import pytest
 from enigma import Rotor
-from enigma.exceptions import InvalidRotorSetting
 
 from .rotor_test import RotorTest
 
@@ -10,7 +8,7 @@ from .rotor_test import RotorTest
 class TestRotors(RotorTest):
     """Test class for testing rotors."""
 
-    def rotor_position_test(self, positions, ring_setting='01'):
+    def rotor_position_test(self, positions, ring_setting=1):
         """Test initial position with given positions."""
         rotor = self.get_rotor()
         set_positions = []
@@ -20,11 +18,23 @@ class TestRotors(RotorTest):
             set_positions.append(rotor.position)
         return set_positions
 
+    def rotor_turnover_positions_test(
+            self, turnover_positionses, ring_setting=1):
+        """Test initial position with given positions."""
+        rotor = self.get_rotor()
+        set_notches = []
+        for turnover_positions in turnover_positionses:
+            rotor = self.get_rotor(
+                turnover_positions=turnover_positions,
+                ring_setting=ring_setting)
+            set_notches.append(rotor.turnover_positions)
+        return set_notches
+
     def test_straight_rotor(self):
         """Test rotor encoding does not change with straight wiring."""
         alpha = Rotor.ALPHA
         for position in alpha:
-            for ring_setting in alpha:
+            for ring_setting in range(1, len(alpha) + 1):
                 for reverse in (True, False):
                     rotor = Rotor(
                         wiring=alpha,
@@ -36,51 +46,31 @@ class TestRotors(RotorTest):
                     ]
                     assert output == alpha
 
-    def test_rotor_set_position(self):
+    def test_set_rotor_position(self):
         """Test initial position with ring setting."""
         assert self.rotor_position_test(['A', 'Q', 'Z']) == ['A', 'Q', 'Z']
 
-    def test_rotor_set_position_with_ring_setting(self):
+    def test_set_rotor_position_with_ring_setting(self):
         """Test that rotor.set_position sets rotor position."""
         assert self.rotor_position_test(['A', 'Q', 'Z']) == ['A', 'Q', 'Z']
 
-    def test_rotor_set_position_lower_case(self):
-        """Test rotor accepts lowercase rotation settings."""
-        assert self.rotor_position_test(['a', 'q', 'z']) == ['A', 'Q', 'Z']
+    def test_set_rotor_turnover_positions(self):
+        """Test initial turnover positions with ring setting."""
+        assert self.rotor_turnover_positions_test(
+            [['A'], ['Q'], ['Z']]) == [['A'], ['Q'], ['Z']]
 
-    def test_rotor_position_numerical(self):
-        """Test rotor accepts numerical rotation settings."""
-        self.rotor_position_test([1, 17, 26]) == ['A', 'Q', 'Z']
-
-    def test_rotor_position_numeric_string(self):
-        """Test rotor accepts numerical rotation settings."""
-        self.rotor_position_test(['01', '17', '26']) == ['A', 'Q', 'Z']
-
-    def test_rotor_position_raises_with_invalid_setting(self):
-        """Test exception is raised with invalid rotor settings."""
-        with pytest.raises(InvalidRotorSetting):
-            self.rotor_position_test([85])
-        with pytest.raises(InvalidRotorSetting):
-            self.rotor_position_test(['38'])
-        with pytest.raises(InvalidRotorSetting):
-            self.rotor_position_test(['*'])
-        with pytest.raises(InvalidRotorSetting):
-            self.rotor_position_test(['ABC'])
+    def test_set_multiple_rotor_turnover_positions(self):
+        """Test rotor accepts a list of turnover position settings."""
+        self.rotor_turnover_positions_test(['A', 'Q']) == ['A', 'Q']
 
     def test_rotor_starting_position(self):
         """Test rotors starting position is correct for passed argument."""
         assert self.get_rotor(position='A').position == 'A'
-        assert self.get_rotor(position='b').position == 'B'
-        assert self.get_rotor(position=1).position == 'A'
-        assert self.get_rotor(position=3).position == 'C'
-        assert self.get_rotor(position='05').position == 'E'
-        assert self.get_rotor(position='A', ring_setting='02').position == 'A'
-        assert self.get_rotor(position='C', ring_setting='02').position == 'C'
-        assert self.get_rotor(position=26, ring_setting='02').position == 'Z'
+        assert self.get_rotor(position='Q').position == 'Q'
 
     def test_rotor_complete_rotation(self):
         """Test that a rotor can complete a full rotation."""
-        rotor = self.get_rotor(ring_setting='02')
+        rotor = self.get_rotor(ring_setting=2)
         initial_position = rotor.position
         for position in range(len(rotor.wiring)):
             rotor.rotate()
@@ -100,17 +90,28 @@ class TestRotors(RotorTest):
 
     def test_get_ring_setting(self):
         """Test rotor sets and reports ring setting correctly."""
-        rotor = self.get_rotor(ring_setting='02')
-        assert rotor.ring_setting == '02'
+        rotor = self.get_rotor(ring_setting=2)
+        assert rotor.ring_setting == 2
 
     def test_ring_setting(self):
         """Test rotor encoding with ring setting."""
-        rotor = self.get_rotor(ring_setting='02')
+        rotor = self.get_rotor(ring_setting=2)
         assert rotor.encode('A') == 'K'
         assert rotor.encode('Q') == 'I'
         assert rotor.encode('H') == 'E'
         rotor.rotate()
         assert rotor.encode('A') == 'E'
+
+    def test_rotor_rotate_next_rotor(self):
+        """Test rotor.get_next_rotor works correctly."""
+        rotor = self.get_rotor(position='A', turnover_positions=['C'])
+        assert rotor.rotate_next_rotor() is False
+        rotor.rotate()
+        assert rotor.rotate_next_rotor() is False
+        rotor.rotate()
+        assert rotor.position == 'C'
+        assert rotor.turnover_positions == ['C']
+        assert rotor.rotate_next_rotor() is True
 
     def test_rotor_I_position_A_input_A(self):
         """Test rotor encoding right to left without rotation."""

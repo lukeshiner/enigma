@@ -1,3 +1,3 @@
 """Enigma, an enimga emulator."""
 
-from .rotor import Rotor, Reflector  # NOQA
+from .rotor import Rotor, Reflector, RotorMechanism  # NOQA
