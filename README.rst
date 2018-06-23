@@ -6,7 +6,7 @@ ________________________________________
 .. image:: https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Enigma_rotors_with_alphabet_rings.jpg/296px-Enigma_rotors_with_alphabet_rings.jpg
   :align: center
 
-`https://commons.wikimedia.org/wiki/File:Enigma_rotors_with_alphabet_rings.jpg <https://commons.wikimedia.org/wiki/File:Enigma_rotors_with_alphabet_rings.jpg>`_ By TedColes [CC0], from Wikimedia Commons
+`Enigma_rotors_with_alphabet_rings.jpg <https://commons.wikimedia.org/wiki/File:Enigma_rotors_with_alphabet_rings.jpg>`_ By TedColes [CC0], from Wikimedia Commons
 
 This package is currently in development.
 
