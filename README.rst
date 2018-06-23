@@ -3,11 +3,10 @@ Enigma
 A python emulator for the Enigma machine
 ________________________________________
 
-.. image:: https://upload.wikimedia.org/wikipedia/commons/b/bd/Enigma_%28crittografia%29_-_Museo_scienza_e_tecnologia_Milano.jpg
-  :height: 400px
+.. image:: https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Enigma_rotors_with_alphabet_rings.jpg/296px-Enigma_rotors_with_alphabet_rings.jpg
   :align: center
 
-`Enigma (crittografia) - Museo scienza e tecnologia Milano.jpg <https://commons.wikimedia.org/wiki/File:Enigma_(crittografia)_-_Museo_scienza_e_tecnologia_Milano.jpg>`_ licensed under `[CC BY-SA 4.0] <https://creativecommons.org/licenses/by-sa/4.0>`_, via Wikimedia Commons
+`https://commons.wikimedia.org/wiki/File:Enigma_rotors_with_alphabet_rings.jpg <https://commons.wikimedia.org/wiki/File:Enigma_rotors_with_alphabet_rings.jpg>`_ By TedColes [CC0], from Wikimedia Commons
 
 This package is currently in development.
 
