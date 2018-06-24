@@ -1,9 +1,11 @@
 """Tests for engima's rotor mechanism."""
 
+import unittest
+
 from enigma import Reflector, Rotor, RotorMechanism
 
 
-class TestRotorMechanism:
+class TestRotorMechanism(unittest.TestCase):
     """Test class for enigma's rotor mechanism."""
 
     def get_rotors(self, settings):
@@ -49,23 +51,23 @@ class TestRotorMechanism:
         All rotors in position A with ring setting of 01.
         """
         rotors = self.get_rotor_mechanism()
-        assert ''.join([rotors.encode(l) for l in 'AAA']) == 'BDZ'
+        self.assertEqual(''.join([rotors.encode(l) for l in 'AAA']), 'BDZ')
 
     def test_first_rotor_rotates(self):
         """Test that the first rotor rotates after a keypress."""
         rotors = self.get_rotor_mechanism()
-        assert rotors.rotors[2].position == 'A'
+        self.assertEqual(rotors.rotors[2].position, 'A')
         rotors.encode('A')
-        assert rotors.rotors[2].position == 'B'
+        self.assertEqual(rotors.rotors[2].position, 'B')
         rotors.encode('A')
-        assert rotors.rotors[2].position == 'C'
+        self.assertEqual(rotors.rotors[2].position, 'C')
 
     def test_second_rotor_rotates(self):
         """Test that the second rotor rotates."""
         rotors = self.get_rotor_mechanism()
         rotors.rotors[2].set_position('V')
-        assert rotors.rotors[2].turnover_positions == ['W']
-        assert rotors.rotors[1].position == 'A'
+        self.assertEqual(rotors.rotors[2].turnover_positions, ['W'])
+        self.assertEqual(rotors.rotors[1].position, 'A')
         rotors.encode('A')
-        assert rotors.rotors[2].position == 'W'
-        assert rotors.rotors[1].position == 'B'
+        self.assertEqual(rotors.rotors[2].position, 'W')
+        self.assertEqual(rotors.rotors[1].position, 'B')

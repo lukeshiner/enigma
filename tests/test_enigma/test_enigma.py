@@ -1,9 +1,11 @@
 """Tests for the enigma module."""
 
+import unittest
+
 from enigma import Enigma
 
 
-class TestEnigma:
+class TestEnigma(unittest.TestCase):
     """Tests for the enigma class."""
 
     def get_enigma(
@@ -36,4 +38,4 @@ class TestEnigma:
     def test_enigma_default_encoding(self):
         """Test enigma encoding with default setup."""
         enigma = self.get_enigma()
-        assert enigma.encode('HELL OWOR LD') == 'ILBD AAMT AZ'
+        self.assertEqual(enigma.encode('HELL OWOR LD'), 'ILBD AAMT AZ')

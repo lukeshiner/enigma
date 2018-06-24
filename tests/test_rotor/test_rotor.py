@@ -44,29 +44,33 @@ class TestRotors(RotorTest):
                         rotor.encode(letter, reverse=reverse)
                         for letter in alpha
                     ]
-                    assert output == alpha
+                    self.assertEqual(output, alpha)
 
     def test_set_rotor_position(self):
         """Test initial position with ring setting."""
-        assert self.rotor_position_test(['A', 'Q', 'Z']) == ['A', 'Q', 'Z']
+        self.assertEqual(
+            self.rotor_position_test(['A', 'Q', 'Z']), ['A', 'Q', 'Z'])
 
     def test_set_rotor_position_with_ring_setting(self):
         """Test that rotor.set_position sets rotor position."""
-        assert self.rotor_position_test(['A', 'Q', 'Z']) == ['A', 'Q', 'Z']
+        self.assertEqual(
+            self.rotor_position_test(['A', 'Q', 'Z']), ['A', 'Q', 'Z'])
 
     def test_set_rotor_turnover_positions(self):
         """Test initial turnover positions with ring setting."""
-        assert self.rotor_turnover_positions_test(
-            [['A'], ['Q'], ['Z']]) == [['A'], ['Q'], ['Z']]
+        self.assertEqual(
+            self.rotor_turnover_positions_test([['A'], ['Q'], ['Z']]),
+            [['A'], ['Q'], ['Z']])
 
     def test_set_multiple_rotor_turnover_positions(self):
         """Test rotor accepts a list of turnover position settings."""
-        self.rotor_turnover_positions_test(['A', 'Q']) == ['A', 'Q']
+        self.assertEqual(
+            self.rotor_turnover_positions_test(['A', 'Q']), ['A', 'Q'])
 
     def test_rotor_starting_position(self):
         """Test rotors starting position is correct for passed argument."""
-        assert self.get_rotor(position='A').position == 'A'
-        assert self.get_rotor(position='Q').position == 'Q'
+        self.assertEqual(self.get_rotor(position='A').position, 'A')
+        self.assertEqual(self.get_rotor(position='Q').position, 'Q')
 
     def test_rotor_complete_rotation(self):
         """Test that a rotor can complete a full rotation."""
@@ -74,85 +78,85 @@ class TestRotors(RotorTest):
         initial_position = rotor.position
         for position in range(len(rotor.wiring)):
             rotor.rotate()
-        assert initial_position == rotor.position
+        self.assertEqual(initial_position, rotor.position)
 
     def test_rotor_position_updates_on_rotation(self):
         """Test rotor position is correct after rotation."""
         rotor = self.get_rotor()
-        assert rotor.position == 'A'
+        self.assertEqual(rotor.position, 'A')
         rotor.rotate()
-        assert rotor.position == 'B'
+        self.assertEqual(rotor.position, 'B')
         rotor.rotate()
-        assert rotor.position == 'C'
+        self.assertEqual(rotor.position, 'C')
         rotor = self.get_rotor()
         rotor.rotate(turns=3)
-        assert rotor.position == 'D'
+        self.assertEqual(rotor.position, 'D')
 
     def test_get_ring_setting(self):
         """Test rotor sets and reports ring setting correctly."""
         rotor = self.get_rotor(ring_setting=2)
-        assert rotor.ring_setting == 2
+        self.assertEqual(rotor.ring_setting, 2)
 
     def test_ring_setting(self):
         """Test rotor encoding with ring setting."""
         rotor = self.get_rotor(ring_setting=2)
-        assert rotor.encode('A') == 'K'
-        assert rotor.encode('Q') == 'I'
-        assert rotor.encode('H') == 'E'
+        self.assertEqual(rotor.encode('A'), 'K')
+        self.assertEqual(rotor.encode('Q'), 'I')
+        self.assertEqual(rotor.encode('H'), 'E')
         rotor.rotate()
-        assert rotor.encode('A') == 'E'
+        self.assertEqual(rotor.encode('A'), 'E')
 
     def test_rotor_rotate_next_rotor(self):
         """Test rotor.get_next_rotor works correctly."""
         rotor = self.get_rotor(position='A', turnover_positions=['C'])
-        assert rotor.rotate_next_rotor() is False
+        self.assertFalse(rotor.rotate_next_rotor())
         rotor.rotate()
-        assert rotor.rotate_next_rotor() is False
+        self.assertFalse(rotor.rotate_next_rotor())
         rotor.rotate()
-        assert rotor.position == 'C'
-        assert rotor.turnover_positions == ['C']
-        assert rotor.rotate_next_rotor() is True
+        self.assertEqual(rotor.position, 'C')
+        self.assertEqual(rotor.turnover_positions, ['C'])
+        self.assertTrue(rotor.rotate_next_rotor())
 
     def test_rotor_I_position_A_input_A(self):
         """Test rotor encoding right to left without rotation."""
         rotor = self.get_rotor()
-        assert rotor.encode('A') == 'E'
+        self.assertEqual(rotor.encode('A'), 'E')
 
     def test_rotor_I_position_A_after_rotation(self):
         """Test rotor encoding right to left with a single rotation."""
         rotor = self.get_rotor()
         rotor.rotate()
-        assert rotor.encode('A') == 'J'
-        assert rotor.encode('Q') == 'T'
-        assert rotor.encode('H') == 'U'
+        self.assertEqual(rotor.encode('A'), 'J')
+        self.assertEqual(rotor.encode('Q'), 'T')
+        self.assertEqual(rotor.encode('H'), 'U')
 
     def test_rotor_III(self):
         """Test rotor encoding right to left with multiple rotations."""
         rotor = self.get_rotor(
             wiring='BDFHJLCPRTXVZNYEIWGAKMUSQO', position='D')
-        assert rotor.encode('A') == 'E'
-        assert rotor.encode('Q') == 'X'
-        assert rotor.encode('H') == 'U'
+        self.assertEqual(rotor.encode('A'), 'E')
+        self.assertEqual(rotor.encode('Q'), 'X')
+        self.assertEqual(rotor.encode('H'), 'U')
 
     def test_rotor_I_position_A_input_A_reverse(self):
         """Test rotor encoding left to right without rotation."""
         rotor = self.get_rotor(
             wiring='EKMFLGDQVZNTOWYHXUSPAIBRCJ', position='A')
-        assert rotor.encode('A', reverse=True) == 'U'
+        self.assertEqual(rotor.encode('A', reverse=True), 'U')
 
     def test_rotor_I_position_A_after_rotation_reverse(self):
         """Test rotor encoding left to right with a single rotation."""
         rotor = self.get_rotor(
             wiring='EKMFLGDQVZNTOWYHXUSPAIBRCJ', position='A')
         rotor.rotate()
-        assert rotor.encode('A', reverse=True) == 'V'
-        assert rotor.encode('Q', reverse=True) == 'W'
-        assert rotor.encode('H', reverse=True) == 'U'
+        self.assertEqual(rotor.encode('A', reverse=True), 'V')
+        self.assertEqual(rotor.encode('Q', reverse=True), 'W')
+        self.assertEqual(rotor.encode('H', reverse=True), 'U')
 
     def test_rotor_III_reverse(self):
         """Test rotor encoding left to right with multiple rotations."""
         rotor = self.get_rotor(
             wiring='BDFHJLCPRTXVZNYEIWGAKMUSQO', position='D')
-        assert rotor.encode('A', reverse=True) == 'Y'
-        assert rotor.encode('Q', reverse=True) == 'G'
-        assert rotor.encode('H', reverse=True) == 'R'
+        self.assertEqual(rotor.encode('A', reverse=True), 'Y')
+        self.assertEqual(rotor.encode('Q', reverse=True), 'G')
+        self.assertEqual(rotor.encode('H', reverse=True), 'R')

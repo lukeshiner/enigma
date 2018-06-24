@@ -1,18 +1,22 @@
-"""Tests for enigma.rotor.wiring.Wiring."""
+"""Tests for enigma.rotor.wiring.Wiring class."""
+
+import unittest
 
 from enigma.rotor.wiring import Wiring
 
 ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 
-def test_wiring_pins():
-    """Test Wiring can be instanicated."""
-    wiring = Wiring(ALPHA)
-    output = [wiring.left_pin(i) for i in range(len(ALPHA))]
-    assert output == list(range(len(ALPHA)))
+class TestWiring(unittest.TestCase):
+    """Tests for enigma.rotor.wiring.Wiring class."""
 
+    def test_wiring_pins(self):
+        """Test Wiring can be instanicated."""
+        wiring = Wiring(ALPHA)
+        output = [wiring.left_pin(i) for i in range(len(ALPHA))]
+        self.assertEqual(output, list(range(len(ALPHA))))
 
-def test_wiring_to_sting():
-    """Test Wiring classes __repr__ method."""
-    wiring = Wiring(ALPHA)
-    assert str(wiring) == ALPHA
+    def test_wiring_to_sting(self):
+        """Test Wiring classes __repr__ method."""
+        wiring = Wiring(ALPHA)
+        self.assertEqual(str(wiring), ALPHA)

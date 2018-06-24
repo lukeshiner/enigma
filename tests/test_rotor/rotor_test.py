@@ -1,10 +1,12 @@
 """Base class for rotor tests."""
 
+import unittest
+
 from enigma.rotor.reflector import Reflector
 from enigma.rotor.rotor import Rotor
 
 
-class RotorTest:
+class RotorTest(unittest.TestCase):
     """Provides tools testing rotors."""
 
     def get_rotor(
