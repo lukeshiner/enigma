@@ -1,12 +1,14 @@
 """Reflectors for enigma."""
 
+from string import ascii_uppercase as alphabet
+
 from .encoder import Encoder
 
 
 class Reflector(Encoder):
     """Base class for reflectors."""
 
-    def encode(self, input):
+    def encode(self, input: str) -> str:
         """
         Return the letter position currently connected to annother.
 
@@ -31,10 +33,10 @@ class Reflector(Encoder):
         output_pin = self.wiring.right_pin(input_pin)
         return self._find_letter(output_pin)
 
-    def _find_pin(self, pin_letter):
+    def _find_pin(self, pin_letter: str) -> int:
         """Return the pin number for a given letter input."""
-        return self.ALPHA.index(pin_letter)
+        return alphabet.index(pin_letter)
 
-    def _find_letter(self, pin_number):
+    def _find_letter(self, pin_number: int) -> str:
         """Find the letter position for a given pin number."""
-        return self.ALPHA[pin_number]
+        return alphabet[pin_number]
