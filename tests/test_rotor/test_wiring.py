@@ -4,7 +4,7 @@ import unittest
 
 from enigma.rotor.wiring import Wiring
 
-ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 
 class TestWiring(unittest.TestCase):

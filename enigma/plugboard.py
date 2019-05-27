@@ -4,7 +4,7 @@
 class Plugboard:
     """Enigma's Plugboard."""
 
-    ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
     def __init__(self, connections=[]):
         """
@@ -44,5 +44,4 @@ class InvalidPlugboard(ValueError):
 
     def __init__(self, connection):
         """Raise exception."""
-        super().__init__(
-            '{} is an invalid plugboard connection.'.format(connection))
+        super().__init__("{} is an invalid plugboard connection.".format(connection))

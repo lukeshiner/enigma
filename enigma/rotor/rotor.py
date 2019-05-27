@@ -20,11 +20,12 @@ class Rotor(Encoder):
     """
 
     def __init__(
-            self,
-            wiring='EKMFLGDQVZNTOWYHXUSPAIBRCJ',
-            ring_setting=1,
-            position='A',
-            turnover_positions=['R']):
+        self,
+        wiring="EKMFLGDQVZNTOWYHXUSPAIBRCJ",
+        ring_setting=1,
+        position="A",
+        turnover_positions=["R"],
+    ):
         """
         Set the initial settings of the rotor.
 

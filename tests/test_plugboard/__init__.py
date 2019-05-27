@@ -1,1 +1,1 @@
-"""Tests for Engma's plugboard."""
+"""Tests for Enigma's plugboard."""

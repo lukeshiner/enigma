@@ -4,7 +4,7 @@
 class Wiring:
     """Find pin connections for an Enima rotor."""
 
-    ALPHA = list('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
+    ALPHA = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
     def __init__(self, wiring):
         """
@@ -19,7 +19,7 @@ class Wiring:
         self.pins = [self.ALPHA.index(char) for char in wiring]
 
     def __repr__(self):
-        return ''.join([self.ALPHA[pin] for pin in self.pins])
+        return "".join([self.ALPHA[pin] for pin in self.pins])
 
     def __len__(self):
         return len(self.pins)

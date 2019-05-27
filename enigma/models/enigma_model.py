@@ -23,7 +23,8 @@ class PresetRotor(Rotor):
             wiring=self.wiring,
             turnover_positions=self.turnover_positions,
             position=position,
-            ring_setting=ring_setting)
+            ring_setting=ring_setting,
+        )
 
 
 class PresetReflector(Reflector):
@@ -37,11 +38,11 @@ class PresetReflector(Reflector):
 class EnigmaModel(Enigma):
     """Base class for enigma models."""
 
-    ROTORS = 'rotors'
-    POSITIONS = 'positions'
-    RING_SETTINGS = 'ring_settings'
-    REFLECTOR = 'reflector'
-    PLUGBOARD_PAIRS = 'plugboard_pairs'
+    ROTORS = "rotors"
+    POSITIONS = "positions"
+    RING_SETTINGS = "ring_settings"
+    REFLECTOR = "reflector"
+    PLUGBOARD_PAIRS = "plugboard_pairs"
 
     rotors = []
     reflectors = []
@@ -79,8 +80,8 @@ class EnigmaModel(Enigma):
         for i in range(3):
             rotor_class = self.rotors[self.initial_settings[self.ROTORS][i]]
             rotor = rotor_class(
-                position=positions[i], ring_setting=int(ring_settings[i]))
+                position=positions[i], ring_setting=int(ring_settings[i])
+            )
             rotors.append(rotor)
         plugboard = Plugboard(plugboard_pairs)
-        super().__init__(
-            rotors=rotors, reflector=reflector, plugboard=plugboard)
+        super().__init__(rotors=rotors, reflector=reflector, plugboard=plugboard)
