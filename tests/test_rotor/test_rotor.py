@@ -1,5 +1,7 @@
 """Tests for enigma's rotors."""
 
+from string import ascii_uppercase
+
 from enigma import Rotor
 
 from .rotor_test import RotorTest
@@ -30,15 +32,19 @@ class TestRotors(RotorTest):
 
     def test_straight_rotor(self):
         """Test rotor encoding does not change with straight wiring."""
-        alpha = Rotor.ALPHA
-        for position in alpha:
-            for ring_setting in range(1, len(alpha) + 1):
+        for position in ascii_uppercase:
+            for ring_setting in range(1, len(ascii_uppercase) + 1):
                 for reverse in (True, False):
                     rotor = Rotor(
-                        wiring=alpha, position=position, ring_setting=ring_setting
+                        wiring=ascii_uppercase,
+                        position=position,
+                        ring_setting=ring_setting,
                     )
-                    output = [rotor.encode(letter, reverse=reverse) for letter in alpha]
-                    self.assertEqual(output, alpha)
+                    output = [
+                        rotor.encode(letter, reverse=reverse)
+                        for letter in ascii_uppercase
+                    ]
+                    self.assertEqual(output, list(ascii_uppercase))
 
     def test_set_rotor_position(self):
         """Test initial position with ring setting."""

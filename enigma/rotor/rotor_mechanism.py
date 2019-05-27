@@ -1,6 +1,11 @@
 """The RotorController class."""
 
 import logging
+from string import ascii_uppercase as alphabet
+from typing import Optional, Sequence
+
+from .reflector import Reflector
+from .rotor import Rotor
 
 logging.basicConfig(
     filename="test.log",
@@ -12,12 +17,21 @@ logging.basicConfig(
 class RotorMechanism:
     """Controller for Enigma's rotors."""
 
-    def __init__(self, rotors=[], reflector=None):
+    def __init__(
+        self,
+        rotors: Optional[Sequence[Rotor]] = None,
+        reflector: Optional[Reflector] = None,
+    ):
         """Set up enimga's rotors."""
-        self.rotors = rotors
+        if rotors is None:
+            self.rotors: Sequence[Rotor] = []
+        else:
+            self.rotors = rotors
+        if reflector is None:
+            reflector = Reflector(wiring=alphabet)
         self.reflector = reflector
 
-    def encode(self, value):
+    def encode(self, value: str) -> str:
         """Return value encoded by rotors."""
         self.update_rotor_positions()
         first_pass_value = self.encode_rotor_right_left(len(self.rotors) - 1, value)
@@ -27,7 +41,7 @@ class RotorMechanism:
         logging.info("Encoded {} to {}".format(value, encoded_value))
         return encoded_value
 
-    def encode_rotor_right_left(self, rotor_position, value):
+    def encode_rotor_right_left(self, rotor_position: int, value: str) -> str:
         """Return right to left encoding of the rotor."""
         encoded_value = self.rotors[rotor_position].encode(value)
         logging.debug(
@@ -37,7 +51,7 @@ class RotorMechanism:
             return encoded_value
         return self.encode_rotor_right_left(rotor_position - 1, encoded_value)
 
-    def encode_rotor_left_right(self, rotor_position, value):
+    def encode_rotor_left_right(self, rotor_position: int, value: str) -> str:
         """Return left to right encoding of the rotor."""
         encoded_value = self.rotors[rotor_position].encode(value, reverse=True)
         logging.debug(
@@ -47,7 +61,7 @@ class RotorMechanism:
             return encoded_value
         return self.encode_rotor_left_right(rotor_position + 1, encoded_value)
 
-    def update_rotor_positions(self):
+    def update_rotor_positions(self) -> None:
         """Update the rotation of the rotors."""
         self.rotors[-1].rotate()
         for rotor_position in reversed(range(0, len(self.rotors) - 1)):

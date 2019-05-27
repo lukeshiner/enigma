@@ -21,3 +21,9 @@ repos:
     rev: master
     hooks:
     -   id: isort
+
+-   repo: https://github.com/pre-commit/mirrors-mypy
+    rev: 'master'
+    hooks:
+    -   id: mypy
+        args: [--config-file=mypy.ini]

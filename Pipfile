@@ -10,6 +10,7 @@ pytest = "*"
 e1839a8 = {path = ".",editable = true}
 mypy = "*"
 black = "*"
+flake8 = "*"
 
 [requires]
 python_version = "3.7"

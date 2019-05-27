@@ -1,5 +1,5 @@
 """Enigma, an enimga emulator."""
 
-from .rotor import Rotor, Reflector, RotorMechanism  # NOQA
-from .plugboard import Plugboard  # NOQA
 from .enigma import Enigma  # NOQA
+from .plugboard import Plugboard  # NOQA
+from .rotor import Reflector, Rotor, RotorMechanism, Wiring  # NOQA
