@@ -12,7 +12,7 @@ class Plugboard:
 
         Args:
             connections:
-                A list of pairs of letters to be connected on the plugboard.
+                A list of tuples of two letters to be connected on the plugboard.
                 E.g. [('A', 'B')].
 
         """

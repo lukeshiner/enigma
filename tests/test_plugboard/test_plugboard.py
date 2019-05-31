@@ -24,7 +24,16 @@ class TestPlugboard(unittest.TestCase):
         self.assertEqual(board.encode("V"), "N")
         self.assertEqual(board.encode("L"), "L")
 
-    def test_invalid_plugboard_raises(self):
+    def test_plugboard_raises_for_invalid_connection(self):
         """Test a plugboard cannot be created with an invalid setup."""
         with self.assertRaises(InvalidPlugboard):
             Plugboard([("A", "A")])
+
+    def test_plugboard_raises_for_invalid_argument(self):
+        """Test a plugboard raises for a connection has the wrong number of arguments."""
+        with self.assertRaises(InvalidPlugboard):
+            Plugboard([("A")])
+        with self.assertRaises(InvalidPlugboard):
+            Plugboard([("A", "B", "C")])
+        with self.assertRaises(InvalidPlugboard):
+            Plugboard([("@", "B")])
