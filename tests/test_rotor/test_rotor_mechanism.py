@@ -1,5 +1,6 @@
 """Tests for engima's rotor mechanism."""
 
+import string
 import unittest
 
 from enigma import Reflector, Rotor, RotorMechanism
@@ -72,3 +73,10 @@ class TestRotorMechanism(unittest.TestCase):
         rotors.encode("A")
         self.assertEqual(rotors.rotors[2].position, "W")
         self.assertEqual(rotors.rotors[1].position, "B")
+
+    def test_rotor_mechanism_without_a_reflector(self):
+        """Test a rotor mechanism can be instaniated without a reflector."""
+        rotors = self.get_rotor_mechanism(reflector=None)
+        reflector = rotors.reflector
+        for letter in string.ascii_uppercase:
+            self.assertEqual(reflector.encode(letter), letter)

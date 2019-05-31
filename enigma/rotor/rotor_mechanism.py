@@ -18,15 +18,10 @@ class RotorMechanism:
     """Controller for Enigma's rotors."""
 
     def __init__(
-        self,
-        rotors: Optional[Sequence[Rotor]] = None,
-        reflector: Optional[Reflector] = None,
+        self, *, rotors: Sequence[Rotor], reflector: Optional[Reflector] = None
     ):
         """Set up enimga's rotors."""
-        if rotors is None:
-            self.rotors: Sequence[Rotor] = []
-        else:
-            self.rotors = rotors
+        self.rotors = rotors
         if reflector is None:
             reflector = Reflector(wiring=alphabet)
         self.reflector = reflector
