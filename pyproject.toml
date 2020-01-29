@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "enigma"
+version = "0.1.0"
+description = "Enigma emulator"
+authors = ["Luke Shiner <luke@lukeshiner.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.3.4"
+flake8 = "^3.7.9"
+black = {version = "^19.10b0", allow-prereleases = true}
+pydocstyle = "^5.0.2"
+mypy = "^0.761"
+coveralls = "^1.10.0"
+pytest-cov = "^2.8.1"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
