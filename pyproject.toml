@@ -4,10 +4,26 @@ version = "0.1.0"
 description = "Enigma emulator"
 authors = ["Luke Shiner <luke@lukeshiner.com>"]
 license = "MIT"
+readme = "README.rst"
+homepage = "https://github.com/lukeshiner/enigma"
+repository = "https://github.com/lukeshiner/enigma"
+
+keywords = ["enigma", "cryptography"]
+
+classifiers = [
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Development Status :: 4 - Beta",
+    "Natural Language :: English",
+    "Topic :: Utilities",
+    "Topic :: Other/Nonlisted Topic",
+]
 
 [tool.poetry.dependencies]
-python = "^3.8"
-
+python = "^3.6"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.3.4"
