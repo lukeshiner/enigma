@@ -7,11 +7,11 @@ python:
   - "3.8"
 # command to install dependencies
 install:
-  - make init
+  - pip install poetry
+  - poetry install
 # command to run tests
 script:
-  - make test
-  - make coverage
+  - poetry run pytest
   - coveralls
 notifications:
   email:
