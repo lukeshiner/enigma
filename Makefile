@@ -1,18 +1,18 @@
 .PHONY: docs
 
 init:
-	pip install pipenv --upgrade
-	pipenv install --dev --skip-lock
+	pip install poetry
+	poetry install
 
 reinit:
-	pipenv --rm
+	poetry env remove python
 	make init
 
 test:
-	pipenv run pytest
+	poetry run pytest
 
 lock:
-	pipenv lock -dr > requirements.txt
+	poetry export -f requirements.txt -o requirements.txt
 
 coverage:
-	pipenv run pytest --cov=enigma tests/ --cov-report=html
+	poetry run pytest --cov=enigma tests/ --cov-report=html
