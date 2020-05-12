@@ -33,10 +33,7 @@ pydocstyle = "^5.0.2"
 mypy = "^0.761"
 coveralls = "^1.10.0"
 pytest-cov = "^2.8.1"
-
-[build-system]
-requires = ["poetry>=0.12"]
-build-backend = "poetry.masonry.api"
+isort = "^4.3.21"
 
 [tool.pytest.core]
 addopts = "--cov=.--cov-report=html"
@@ -44,3 +41,8 @@ addopts = "--cov=.--cov-report=html"
 [tool.coverage.run]
 branch = true
 omit = ["setup.py", "tests/*"]
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
+
