@@ -53,7 +53,7 @@ class TestRotorMechanism(unittest.TestCase):
         All rotors in position A with ring setting of 01.
         """
         rotors = self.get_rotor_mechanism()
-        self.assertEqual("".join([rotors.encode(l) for l in "AAA"]), "BDZ")
+        self.assertEqual("".join([rotors.encode(char) for char in "AAA"]), "BDZ")
 
     def test_first_rotor_rotates(self):
         """Test that the first rotor rotates after a keypress."""
