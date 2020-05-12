@@ -14,6 +14,7 @@ script:
   - flake8 .
   - isort --recursive -c
   - black --check .
+  - mypy .
   - poetry run pytest
   - coveralls
 notifications:
