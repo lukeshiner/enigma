@@ -30,17 +30,13 @@ pytest = "^5.4.1"
 flake8 = "^3.7.9"
 black = {version = "^19.10b0", allow-prereleases = true}
 pydocstyle = "^5.0.2"
-mypy = "^0.761"
 coveralls = "^1.10.0"
 pytest-cov = "^2.8.1"
 isort = "^4.3.21"
+mypy = "^0.790"
 
 [tool.pytest.core]
 addopts = "--cov=.--cov-report=html"
-
-[tool.coverage.run]
-branch = true
-omit = ["setup.py", "tests/*"]
 
 [build-system]
 requires = ["poetry>=0.12"]
