@@ -1,5 +1,5 @@
-.. image:: https://travis-ci.org/lukeshiner/enigma.svg?branch#master
-    :target: https://travis-ci.org/lukeshiner/enigma
+.. image:: https://github.com/lukeshiner/enigma/workflows/CI/badge.svg
+    :target: https://github.com/lukeshiner/enigma/actions?query=workflow%3ACI
 
 .. image:: https://coveralls.io/repos/github/lukeshiner/enigma/badge.svg?branch#ci-coveralls
     :target: https://coveralls.io/github/lukeshiner/enigma?branch#ci-coveralls

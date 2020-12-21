@@ -1,6 +1,6 @@
 """Base classes for specific models of Enigma machine."""
 
-from typing import Dict, Sequence, Type
+from typing import Dict, Sequence, Tuple, Type
 
 from enigma import Enigma, Plugboard, Reflector, Rotor
 
@@ -63,7 +63,7 @@ class EnigmaModel(Enigma):
         rotors: Sequence[str],
         positions: Sequence[str],
         ring_settings: Sequence[str],
-        plugboard_pairs: Sequence[str],
+        plugboard_pairs: Sequence[Tuple[str, str]],
         reflector: str
     ):
         """

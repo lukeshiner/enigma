@@ -1,12 +1,12 @@
 """Enigma's Plugboard."""
 from string import ascii_uppercase as alphabet
-from typing import Dict, Optional, Sequence
+from typing import Dict, Optional, Sequence, Tuple
 
 
 class Plugboard:
     """Enigma's Plugboard."""
 
-    def __init__(self, connections: Optional[Sequence[str]] = None):
+    def __init__(self, connections: Optional[Sequence[Tuple[str, str]]] = None):
         """
         Set up plugboard connections.
 
@@ -30,7 +30,7 @@ class Plugboard:
             return self.connections[value]
         return value
 
-    def validate_connection(self, connection: str) -> None:
+    def validate_connection(self, connection: Tuple[str, str]) -> None:
         """Raise error if connection is not valid."""
         if len(connection) != 2:
             raise InvalidPlugboard(connection)
@@ -43,6 +43,6 @@ class Plugboard:
 class InvalidPlugboard(ValueError):
     """Exception for invalid plugboard setups."""
 
-    def __init__(self, connection: str):
+    def __init__(self, connection: Tuple[str, str]):
         """Raise exception."""
         super().__init__("{} is an invalid plugboard connection.".format(connection))
