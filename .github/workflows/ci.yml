@@ -28,7 +28,7 @@ jobs:
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
       - name: Lint with isort
         run: |
-          isort --recursive -c
+          isort --recursive -c .
       - name: Lint with black
         run: |
           black --check .
