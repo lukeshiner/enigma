@@ -33,6 +33,7 @@ pytest-cov = "^3.0.0"
 isort = "^5.9.3"
 mypy = "^0.910"
 black = "^21.9b0"
+flake8-docstrings = "^1.6.0"
 
 [tool.pytest.core]
 addopts = "--cov=.--cov-report=html"
