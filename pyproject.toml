@@ -11,9 +11,11 @@ repository = "https://github.com/lukeshiner/enigma"
 keywords = ["enigma", "cryptography"]
 
 classifiers = [
-    "Programming Language :: Python :: 3.6",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Development Status :: 4 - Beta",
@@ -23,17 +25,17 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.6.2,<4.0"
+python = ">=3.7,<4.0"
 
 [tool.poetry.dev-dependencies]
-pytest = "^7.0.1"
-flake8 = "^5.0.4"
-coveralls = "^3.3.1"
-pytest-cov = "^4.0.0"
-isort = "^5.10.1"
-mypy = "^0.971"
-black = "^22.8"
-flake8-docstrings = "^1.6.0"
+pytest = ">=7.0.1"
+flake8 = ">=5.0.4"
+coveralls = ">=3.3.1"
+pytest-cov = ">=4.0.0"
+isort = ">=5.10.1"
+mypy = ">=0.971"
+black = ">=22.8"
+flake8-docstrings = ">=1.6.0"
 
 [tool.pytest.core]
 addopts = "--cov=.--cov-report=html"
