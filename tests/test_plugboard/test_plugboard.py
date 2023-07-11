@@ -37,3 +37,6 @@ class TestPlugboard(unittest.TestCase):
             Plugboard([("A", "B", "C")])
         with self.assertRaises(InvalidPlugboard):
             Plugboard([("@", "B")])
+
+    def test_plugboard_can_be_empty(self):
+        Plugboard()
