@@ -1,4 +1,5 @@
 """The wiring class."""
+
 from string import ascii_uppercase as alphabet
 
 

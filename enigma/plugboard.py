@@ -1,6 +1,9 @@
 """Enigma's Plugboard."""
+
 from string import ascii_uppercase as alphabet
 from typing import Dict, Optional, Sequence, Tuple
+
+from enigma.exceptions import InvalidPlugboard
 
 
 class Plugboard:
@@ -38,11 +41,3 @@ class Plugboard:
             raise InvalidPlugboard(connection)
         if connection[0] not in alphabet or connection[1] not in alphabet:
             raise InvalidPlugboard(connection)
-
-
-class InvalidPlugboard(ValueError):
-    """Exception for invalid plugboard setups."""
-
-    def __init__(self, connection: Tuple[str, str]):
-        """Raise exception."""
-        super().__init__("{} is an invalid plugboard connection.".format(connection))

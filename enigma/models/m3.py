@@ -1,95 +1,50 @@
 """Specific Enigma models."""
 
+from enigma.rotor import Rotor
+from enigma.rotor.reflector import Reflector
 
-from .enigma_model import EnigmaModel, PresetReflector, PresetRotor
+from .enigma_model import EnigmaModel
 
+rotors = {
+    "I": Rotor(wiring="EKMFLGDQVZNTOWYHXUSPAIBRCJ", turnover_positions="R"),
+    "II": Rotor(wiring="AJDKSIRUXBLHWTMCQGZNPYFVOE", turnover_positions="F"),
+    "III": Rotor(wiring="BDFHJLCPRTXVZNYEIWGAKMUSQO", turnover_positions="W"),
+    "IV": Rotor(wiring="ESOVPZJAYQUIRHXLNFTGKDCMWB", turnover_positions="K"),
+    "V": Rotor(wiring="VZBRGITYUPSDNHLXAWMJQOFECK", turnover_positions="A"),
+    "VI": Rotor(wiring="JPGVOUMFYQBENHZRDKASXLICTW", turnover_positions="AN"),
+    "VII": Rotor(wiring="NZJHGRCXMYSWBOUFAIVLPEKQDT", turnover_positions="AN"),
+    "VIII": Rotor(wiring="FKQHTLXOCBJSPDZRAMEWNIUYGV", turnover_positions="AN"),
+}
 
-class RotorI(PresetRotor):
-    """Enigma M3 Rotor I."""
-
-    set_wiring = "EKMFLGDQVZNTOWYHXUSPAIBRCJ"
-    turnover_positions = ["R"]
-
-
-class RotorII(PresetRotor):
-    """Enigma M3 Rotor II."""
-
-    set_wiring = "AJDKSIRUXBLHWTMCQGZNPYFVOE"
-    turnover_positions = ["F"]
-
-
-class RotorIII(PresetRotor):
-    """Enigma M3 Rotor III."""
-
-    set_wiring = "BDFHJLCPRTXVZNYEIWGAKMUSQO"
-    turnover_positions = ["W"]
-
-
-class RotorIV(PresetRotor):
-    """Enigma M3 Rotor IV."""
-
-    set_wiring = "ESOVPZJAYQUIRHXLNFTGKDCMWB"
-    turnover_positions = ["K"]
-
-
-class RotorV(PresetRotor):
-    """Enigma M3 Rotor V."""
-
-    set_wiring = "VZBRGITYUPSDNHLXAWMJQOFECK"
-    turnover_positions = ["A"]
-
-
-class RotorVI(PresetRotor):
-    """Enigma M3 Rotor VI."""
-
-    set_wiring = "JPGVOUMFYQBENHZRDKASXLICTW"
-    turnover_positions = ["A", "N"]
-
-
-class RotorVII(PresetRotor):
-    """Enigma M3 Rotor VII."""
-
-    set_wiring = "NZJHGRCXMYSWBOUFAIVLPEKQDT"
-    turnover_positions = ["A", "N"]
-
-
-class RotorVIII(PresetRotor):
-    """Enigma M3 Rotor VIII."""
-
-    set_wiring = "FKQHTLXOCBJSPDZRAMEWNIUYGV"
-    turnover_positions = ["A", "N"]
-
-
-class ReflectorA(PresetReflector):
-    """Enigma M3 Reflector A."""
-
-    set_wiring = "EJMZALYXVBWFCRQUONTSPIKHGD"
-
-
-class ReflectorB(PresetReflector):
-    """Enigma M3 Reflector B."""
-
-    set_wiring = "YRUHQSLDPXNGOKMIEBFZCWVJAT"
-
-
-class ReflectorC(PresetReflector):
-    """Enigma M3 Reflector C."""
-
-    set_wiring = "FVPJIAOYEDRZXWGCTKUQSBNMHL"
+reflectors = {
+    "A": Reflector(wiring="EJMZALYXVBWFCRQUONTSPIKHGD"),
+    "B": Reflector(wiring="YRUHQSLDPXNGOKMIEBFZCWVJAT"),
+    "C": Reflector(wiring="FVPJIAOYEDRZXWGCTKUQSBNMHL"),
+}
 
 
 class M3(EnigmaModel):
+    """The M3 Enigma."""
+
+    name = "M3"
+
+    available_rotors = dict(rotors)
+    available_reflectors = dict(reflectors)
+    rotor_count = 3
+
+
+class M3Army(M3):
     """The Army M3 Enigma."""
 
+    name = "M3 Army"
+
     available_rotors = {
-        "I": RotorI,
-        "II": RotorII,
-        "III": RotorIII,
-        "IV": RotorIV,
-        "V": RotorV,
-        "VI": RotorVI,
-        "VII": RotorVII,
-        "VIII": RotorVIII,
+        "I": rotors["I"],
+        "II": rotors["II"],
+        "III": rotors["III"],
+        "IV": rotors["IV"],
+        "V": rotors["V"],
     }
 
-    available_reflectors = {"A": ReflectorA, "B": ReflectorB, "C": ReflectorC}
+    available_reflectors = {"A": reflectors["A"]}
+    rotor_count = 3

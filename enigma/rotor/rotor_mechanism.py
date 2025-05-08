@@ -62,3 +62,8 @@ class RotorMechanism:
         for rotor_position in reversed(range(0, len(self.rotors) - 1)):
             if self.rotors[rotor_position + 1].rotate_next_rotor():
                 self.rotors[rotor_position].rotate()
+
+    def reset(self) -> None:
+        """Reset the mechanism to it's initial settings."""
+        for rotor in self.rotors:
+            rotor.reset()

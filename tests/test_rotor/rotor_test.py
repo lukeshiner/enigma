@@ -14,13 +14,13 @@ class RotorTest(unittest.TestCase):
         wiring="EKMFLGDQVZNTOWYHXUSPAIBRCJ",
         ring_setting=1,
         position="A",
-        turnover_positions=["R"],
+        turnover_positions="R",
     ):
         """Return Rotor object."""
         return Rotor(
             wiring=wiring,
             ring_setting=ring_setting,
-            position=position,
+            start_position=position,
             turnover_positions=turnover_positions,
         )
 

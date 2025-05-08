@@ -10,7 +10,7 @@ class TestReflector(unittest.TestCase):
 
     def test_reflector_output(self):
         """Test refelectors give a correct encoding."""
-        rotor = Reflector(wiring="YRUHQSLDPXNGOKMIEBFZCWVJAT")
-        self.assertEqual(rotor.encode("A"), "Y")
-        self.assertEqual(rotor.encode("Q"), "E")
-        self.assertEqual(rotor.encode("H"), "D")
+        reflector = Reflector(wiring="YRUHQSLDPXNGOKMIEBFZCWVJAT")
+        self.assertEqual(reflector.encode("A"), "Y")
+        self.assertEqual(reflector.encode("Q"), "E")
+        self.assertEqual(reflector.encode("H"), "D")

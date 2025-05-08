@@ -15,19 +15,19 @@ class TestEnigma(unittest.TestCase):
                 "wiring": "EKMFLGDQVZNTOWYHXUSPAIBRCJ",
                 "position": "A",
                 "ring_setting": 1,
-                "turnover_positions": ["R"],
+                "turnover_positions": "R",
             },
             {
                 "wiring": "AJDKSIRUXBLHWTMCQGZNPYFVOE",
                 "position": "A",
                 "ring_setting": 1,
-                "turnover_positions": ["F"],
+                "turnover_positions": "F",
             },
             {
                 "wiring": "BDFHJLCPRTXVZNYEIWGAKMUSQO",
                 "position": "A",
                 "ring_setting": 1,
-                "turnover_positions": ["W"],
+                "turnover_positions": "W",
             },
         ],
         reflector="YRUHQSLDPXNGOKMIEBFZCWVJAT",
@@ -37,7 +37,7 @@ class TestEnigma(unittest.TestCase):
         used_rotors = [
             Rotor(
                 wiring=_["wiring"],
-                position=_["position"],
+                start_position=_["position"],
                 ring_setting=_["ring_setting"],
                 turnover_positions=_["turnover_positions"],
             )

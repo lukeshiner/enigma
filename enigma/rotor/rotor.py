@@ -1,7 +1,8 @@
 """Encoders for enigma's rotor mechanism."""
 
+from __future__ import annotations
+
 from string import ascii_uppercase as alphabet
-from typing import Sequence
 
 from .encoder import Encoder
 
@@ -24,10 +25,10 @@ class Rotor(Encoder):
 
     def __init__(
         self,
-        wiring: str = "EKMFLGDQVZNTOWYHXUSPAIBRCJ",
+        wiring: str,
+        turnover_positions: str,
         ring_setting: int = 1,
-        position: str = "A",
-        turnover_positions: Sequence[str] = ["R"],
+        start_position: str = "A",
     ):
         """
         Set the initial settings of the rotor.
@@ -52,12 +53,11 @@ class Rotor(Encoder):
                 which the rotor will cause the next to rotate. Default: 'A'.
 
         """
-        super().__init__(wiring)
-        self.start_position = position
-        self.turnover_positions = turnover_positions
-        self.ring_setting = ring_setting
         self.rotation = 0
-        self.set_position(self.start_position)
+        self.ring_setting = ring_setting
+        super().__init__(wiring=wiring)
+        self.set_start_position(start_position)
+        self.turnover_positions = turnover_positions.upper()
 
     def encode(self, letter: str, reverse: bool = False) -> str:
         """
@@ -98,12 +98,15 @@ class Rotor(Encoder):
         if self.rotation >= len(self.wiring):
             self.rotation = 0
 
-    def set_position(self, letter_position: str) -> None:
+    def set_start_position(self, position_letter: str) -> None:
+        """Set the start position of the rotor."""
+        self.start_position = position_letter
+        self.set_position(self.start_position)
+
+    def set_position(self, position: str) -> None:
         """Turn the rotor to a given position."""
-        numeric_position = alphabet.index(letter_position) + 1
-        offset = numeric_position - self.ring_setting
-        if offset < 0:
-            offset += len(self.wiring)
+        numeric_position = alphabet.index(position) + 1
+        offset = (numeric_position - self.ring_setting) % 26
         self.rotation = offset
 
     def rotate_next_rotor(self) -> bool:
@@ -123,12 +126,14 @@ class Rotor(Encoder):
     def _find_pin(self, pin_letter: str) -> int:
         """Return the pin number for a given letter input."""
         pin_position = alphabet.index(pin_letter)
-        offset = pin_position + self.rotation
-        if offset >= len(self.wiring):
-            offset -= len(self.wiring)
+        offset = (pin_position + self.rotation) % 26
         return offset
 
     def _find_letter(self, pin_number: int) -> str:
         """Find the letter position for a given pin number."""
         offset = pin_number - self.rotation
         return alphabet[offset]
+
+    def reset(self) -> None:
+        """Reset the rotor's position."""
+        self.set_position(self.start_position)

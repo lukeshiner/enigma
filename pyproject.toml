@@ -11,11 +11,11 @@ repository = "https://github.com/lukeshiner/enigma"
 keywords = ["enigma", "cryptography"]
 
 classifiers = [
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Development Status :: 4 - Beta",
@@ -25,22 +25,23 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.7,<4.0"
+python = ">=3.9,<4.0"
 
-[tool.poetry.dev-dependencies]
-pytest = ">=7.0.1"
-flake8 = ">=5.0.4"
-coveralls = ">=3.3.1"
-pytest-cov = ">=4.0.0"
-isort = ">=5.10.1"
-mypy = ">=0.971"
-black = ">=22.8"
-flake8-docstrings = ">=1.6.0"
+[tool.poetry.group.dev.dependencies]
+black = "^25.1.0"
+flake8 = "^7.2.0"
+isort = "^6.0.1"
+flake8-bugbear = "^24.12.12"
+flake8-docstrings = "^1.7.0"
+pytest = "^8.3.5"
+pytest-cov = "^6.1.1"
+pytest-integration = "^0.2.3"
+mypy = "^1.15.0"
 
 [tool.pytest.core]
 addopts = "--cov=.--cov-report=html"
 
 [build-system]
-requires = ["poetry>=0.12"]
-build-backend = "poetry.masonry.api"
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
 

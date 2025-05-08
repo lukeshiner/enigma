@@ -16,7 +16,7 @@ class TestWiring(unittest.TestCase):
         output = [wiring.left_pin(i) for i in range(len(ALPHA))]
         self.assertEqual(output, list(range(len(ALPHA))))
 
-    def test_wiring_to_sting(self):
+    def test_wiring_to_string(self):
         """Test Wiring classes __repr__ method."""
         wiring = Wiring(ALPHA)
         self.assertEqual(str(wiring), ALPHA)

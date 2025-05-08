@@ -32,7 +32,7 @@ class TestPlugboard(unittest.TestCase):
     def test_plugboard_raises_for_invalid_argument(self):
         """Test a plugboard raises for a connection has the wrong number of arguments."""
         with self.assertRaises(InvalidPlugboard):
-            Plugboard([("A")])
+            Plugboard(["A"])
         with self.assertRaises(InvalidPlugboard):
             Plugboard([("A", "B", "C")])
         with self.assertRaises(InvalidPlugboard):

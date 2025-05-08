@@ -7,9 +7,14 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
+        # prettier-ignore
+        python-version: ["3.9","3.10","3.11","3.12","3.13"]
 
     steps:
+      - name: Install Libraries
+        run: |
+          sudo apt update
+          sudo apt install libxml2-dev libxslt-dev
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
@@ -28,7 +33,7 @@ jobs:
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
       - name: Lint with isort
         run: |
-          isort --recursive -c .
+          isort . -c
       - name: Lint with black
         run: |
           black --check .
@@ -37,9 +42,9 @@ jobs:
           mypy .
       - name: Test with pytest
         run: |
-          pytest -sv
+          pytest -sv --cov-report lcov
       - name: Push to Coveralls
         continue-on-error: true
-        uses: AndreMiras/coveralls-python-action@master
+        uses: coverallsapp/github-action@v2
         with:
           github-token: ${{ github.token }}

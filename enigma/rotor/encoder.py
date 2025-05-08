@@ -8,6 +8,6 @@ class Encoder:
 
     name = None
 
-    def __init__(self, wiring: str = "YRUHQSLDPXNGOKMIEBFZCWVJAT"):
+    def __init__(self, wiring: str):
         """Set wiring and position encodings."""
         self.wiring = Wiring(wiring)

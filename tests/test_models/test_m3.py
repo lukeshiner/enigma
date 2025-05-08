@@ -16,23 +16,12 @@ class TestM3(unittest.TestCase):
             "SZWNR FXWFY SSXJZ VIJHI DISHP RKLKA YUPAD TXQSP INQMA TLPIF SVKDA"
             "SCTAC DPBOP VHJK"
         )
-        enigma = M3(
-            rotors=("II", "IV", "V"),
+        enigma = M3.from_strings(
+            rotors="II IV V",
             positions="BLA",
             ring_settings=(2, 21, 12),
             reflector="B",
-            plugboard_pairs=(
-                "AV",
-                "BS",
-                "CG",
-                "DL",
-                "FU",
-                "HZ",
-                "IN",
-                "KM",
-                "OW",
-                "RX",
-            ),
+            plugboard="AV BS CG DL FU HZ IN KM OW RX",
         )
         expected_output = (
             "AUFKL XABTE ILUNG XVONX KURTI NOWAX KURTI NOWAX NORDW ESTLX "

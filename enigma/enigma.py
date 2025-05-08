@@ -1,4 +1,5 @@
 """Base class for Enigma machines."""
+
 from string import ascii_uppercase as alphabet
 from typing import List, Sequence
 
@@ -48,3 +49,7 @@ class Enigma:
         text_blocks = ["".join(block) for block in blocks]
         text = " ".join(text_blocks)
         return text
+
+    def reset(self) -> None:
+        """Reset to starting settings."""
+        self.rotor_mechanism.reset()

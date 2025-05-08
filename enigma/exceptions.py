@@ -1,3 +1,9 @@
 """Exceptions for enigma."""
 
-from .plugboard import InvalidPlugboard  # NOQA
+
+class InvalidPlugboard(ValueError):
+    """Exception for invalid plugboard setups."""
+
+    def __init__(self, connection: tuple[str, str]):
+        """Raise exception."""
+        super().__init__("{} is an invalid plugboard connection.".format(connection))

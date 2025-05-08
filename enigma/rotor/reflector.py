@@ -1,5 +1,7 @@
 """Reflectors for enigma."""
 
+from __future__ import annotations
+
 from string import ascii_uppercase as alphabet
 
 from .encoder import Encoder
@@ -10,7 +12,7 @@ class Reflector(Encoder):
 
     def encode(self, input: str) -> str:
         """
-        Return the letter position currently connected to annother.
+        Return the letter position currently connected input.
 
         The letter positions are those of a rotor in position 'A' with a ring
         setting of 01.
