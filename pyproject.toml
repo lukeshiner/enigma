@@ -1,10 +1,10 @@
 [tool.poetry]
 name = "enigma"
-version = "0.1.0"
+version = "0.2.0"
 description = "Enigma emulator"
 authors = ["Luke Shiner <luke@lukeshiner.com>"]
 license = "MIT"
-readme = "README.rst"
+readme = "README.md"
 homepage = "https://github.com/lukeshiner/enigma"
 repository = "https://github.com/lukeshiner/enigma"
 
@@ -36,7 +36,6 @@ flake8-docstrings = "^1.7.0"
 pytest = "^8.3.5"
 pytest-cov = "^6.1.1"
 pytest-integration = "^0.2.3"
-mypy = "^1.15.0"
 
 [tool.pytest.core]
 addopts = "--cov=.--cov-report=html"
