@@ -1,5 +1,10 @@
 # Enigma
-## A Python library for simulating Enigma ciphering machines
+
+![Coveralls](https://img.shields.io/coverallsCoverage/github/lukeshiner/enigma)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/lukeshiner/enigma/ci.yml)
+![GitHub License](https://img.shields.io/github/license/lukeshiner/enigma)
+
+## Python library for simulating Enigma ciphering machines
 
 This library allows you to encipher (and decipher) [Enigma](https://en.wikipedia.org/wiki/Enigma_machine) messages. It simulates a real Enigma machine and has been tested against real decrypts.
 
