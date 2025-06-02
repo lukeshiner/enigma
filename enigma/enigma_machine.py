@@ -1,6 +1,5 @@
 """Enigma."""
 
-import itertools
 from string import ascii_uppercase
 
 
@@ -186,12 +185,10 @@ class EnigmaMachine:
         """Return text with spaces every block_size characters."""
         if block_size == 0:
             return text
-        return " ".join(
-            (
-                "".join(_)
-                for _ in list(itertools.batched(text, block_size, strict=False))
-            )
-        )
+        blocks = []
+        for i in range(0, len(text), block_size):
+            blocks.append("".join(text[i : i + block_size]))
+        return " ".join(blocks)
 
     def set_rotors(self, rotors):
         """
